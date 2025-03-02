@@ -1,0 +1,188 @@
+@import url("https://fonts.googleapis.com/css2?family=Playwrite+NL&display=swap");
+
+:root {
+    --color-white-smoke: #f8f5f1;
+    --color-yellow-duck: #f3dfa2;
+    --color-cyan-turtle: #4ea1a6;
+    --color-red-blood: #bb4430;
+    --color-black-gray: #2b2627;
+}
+
+html::-webkit-scrollbar {
+    display: none;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding-top: 100vh;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.slide {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.inner-wrapper {
+    display: flex;
+    flex-direction: row;
+    width: 400vw;
+    transform: rotate(90deg) translateY(-100vh);
+    transform-origin: top left;
+}
+
+.outter-wrapper {
+    width: 100vh;
+    height: 100vw;
+    transform: rotate(-90deg) translateX(-100vh);
+    transform-origin: top left;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    scrollbar-width: none;
+}
+
+.first {
+    background-color: var(--color-white-smoke);
+}
+
+.second {
+    background-color: var(--color-yellow-duck);
+}
+
+.third {
+    background-color: var(--color-red-blood);
+}
+
+.fourth {
+    background-color: var(--color-white-smoke);
+    z-index: 17;
+}
+
+.hero-title {
+    position: fixed; /* Keep it fixed on the screen */
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 4.5rem;
+    text-align: center;
+    color: var(--color-red-blood);
+    font-family: "Playwrite NL", cursive;
+    font-weight: 500;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.heart {
+    position: relative;
+    width: 100px;
+    height: 90px;
+}
+.heart:before,
+.heart:after {
+    position: absolute;
+    content: "";
+    left: 20px;
+    top: 100px;
+    width: 75px;
+    height: 120px;
+    background: var(--color);
+    border-radius: 50px 50px 0 0;
+    transform: rotate(-45deg);
+    transform-origin: 0 100%;
+}
+.heart:after {
+    left: -55px;
+    transform: rotate(45deg);
+    transform-origin: 100% 100%;
+}
+
+.arrow {
+    position: relative;
+    font-size: 3rem;
+    bottom: -115px;
+    z-index: 2;
+    color: var(--color);
+    display: inline-block;
+}
+
+.second img {
+    border: 2px solid var(--color-black-gray);
+    border-radius: 5%;
+    opacity: 0;
+    position: relative;
+    top: var(--position-y, 0px);
+    left: var(--position-x, 0px);
+    transform: scale(0.8);
+    transition:
+        opacity 0.5s ease-out,
+        transform 0.5s ease-out;
+}
+.second img {
+    opacity: 0;
+    transform: scale(0.8);
+    transition:
+        opacity 0.2s ease-out,
+        transform 0.2s ease-out;
+}
+
+.bouncing-leftright {
+    will-change: transform;
+    animation: leftRightLoop 0.7s infinite ease-in-out !important;
+}
+
+@keyframes leftRightLoop {
+    0% {
+        transform: translateX(0px);
+    }
+    50% {
+        transform: translateX(5px);
+    }
+    100% {
+        transform: translateX(0px);
+    }
+}
+.bouncing-updown {
+    will-change: transform;
+    animation: upDownLoop 0.7s infinite ease-in-out !important;
+}
+@keyframes upDownLoop {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(5px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+.letter {
+    border: 2.5px solid var(--color-black-gray);
+    border-radius: 5%;
+    width: 50vw;
+    height: 50vh;
+    padding: 22px;
+    z-index: 10;
+}
+
+.letter-title {
+    font-family: Consolas;
+}
+
+.letter-text {
+    font-size: 1rem;
+    font-family: Consolas;
+    gap: 2px;
+    line-height: 1.5rem;
+}
