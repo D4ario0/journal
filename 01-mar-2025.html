@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="parallax_in.css" />
+        <script src="shadow.js"></script>
+        <title>Mar 1</title>
+    </head>
+    <body>
+        <h1 class="hero-title" id="title">Felices 7 meses</h1>
+        <!-- Horizontal scrolling section -->
+        <div class="outter-wrapper">
+            <div class="inner-wrapper">
+                <div class="slide first">
+                    <div>
+                        <div class="heart" style="--color: #bb4430" id="heart">
+                            <span
+                                style="--color: #f8f5f1"
+                                class="arrow bouncing-leftright"
+                                >→</span
+                            >
+                        </div>
+                    </div>
+                </div>
+                <div class="slide second">
+                    <div>
+                        <img
+                            src="assets/IMG_2405.webp"
+                            width="220px"
+                            data-position-x="-210px"
+                            data-position-y="-250px"
+                        />
+                        <img
+                            src="assets/IMG_2517.webp"
+                            width="250px"
+                            data-position-x="-175px"
+                            data-position-y="220px"
+                        />
+                        <img
+                            src="assets/IMG_7545.webp"
+                            width="300px"
+                            data-position-x="-50px"
+                            data-position-y="-250px"
+                        />
+                        <img
+                            src="assets/IMG_7394.webp"
+                            width="200px"
+                            data-position-x="-100px"
+                            data-position-y="180px"
+                        />
+                        <img
+                            src="assets/IMG_2355.webp"
+                            width="200px"
+                            data-position-x="100px"
+                            data-position-y="-250px"
+                        />
+                    </div>
+                </div>
+                <div class="slide second">
+                    <div>
+                        <img
+                            src="assets/IMG_7535.webp"
+                            width="220px"
+                            data-position-x="-210px"
+                            data-position-y="250px"
+                        />
+                        <img
+                            src="assets/IMG_7623.webp"
+                            width="260px"
+                            data-position-x="-175px"
+                            data-position-y="-220px"
+                        />
+                        <img
+                            src="assets/IMG_7623.webp"
+                            width="290px"
+                            data-position-x="-50px"
+                            data-position-y="250px"
+                        />
+                        <img
+                            src="assets/IMG_2611.webp"
+                            width="185px"
+                            data-position-x="-100px"
+                            data-position-y="-230px"
+                        />
+                        <img
+                            src="assets/IMG_2299.webp"
+                            width="205px"
+                            data-position-x="100px"
+                            data-position-y="250px"
+                        />
+                    </div>
+                </div>
+                <div class="slide third">
+                    <div class="heart" style="--color: #f8f5f1" id="heart">
+                        <span
+                            class="arrow bouncing-updown"
+                            style="--color: #bb4430; right: -10px"
+                            >↓</span
+                        >
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Vertical scrolling section -->
+        <div class="slide fourth">
+            <article class="letter">
+                <h1 class="letter-title">Te amo y lo sigo intentando</h1>
+                <p class="letter-text">
+                    Hola... no se si te preocupaste o no, pero ajá ayer no hubo
+                    carta porque estaba trabajando en esto... Le dediqué casi 2
+                    día y un así siento que me falta un montón de detalles.
+                </p>
+                <p class="letter-text">
+                    Quiero seguir intentandolo contigo, porque eres una mujer
+                    que vale la pena y me hace sentir querido, y verte crecer me
+                    inspira a mi a ser mejor. Verte subir me llena de alegría.
+                    Te quiero más allá de lo físico, de verdad quiero que te
+                    vaya bien en todo.
+                </p>
+                <p class="letter-text">
+                    En fin saldré esta noche con mi grupo de amix espero te
+                    guste este pequeño detalle.
+                </p>
+                <p class="letter-text">~Te quiere Alex❤️~</p>
+            </article>
+        </div>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const images = document.querySelectorAll(".second img");
+                const wrapper = document.querySelector(".outter-wrapper");
+                const title = document.querySelector(".hero-title");
+                let ticking = false; // Prevent multiple updates per frame
+
+                // Set initial positions using dataset attributes
+                images.forEach((img) => {
+                    const posX = img.dataset.positionX || "0px"; // Default to 0px if not set
+                    const posY = img.dataset.positionY || "0px";
+                    img.style.setProperty("--position-x", posX);
+                    img.style.setProperty("--position-y", posY);
+                });
+
+                function updateImages() {
+                    images.forEach((img) => {
+                        const rect = img.getBoundingClientRect();
+                        const viewportWidth = window.innerWidth;
+
+                        // Calculate smooth transition effect
+                        const progress = Math.max(
+                            0,
+                            Math.min(1, rect.left / viewportWidth),
+                        );
+                        const opacity = 1 - Math.abs(progress - 0.5) * 2;
+                        const scale = 0.8 + opacity * 0.2;
+
+                        img.style.opacity = opacity;
+                        img.style.transform = `scale(${scale})`;
+                    });
+
+                    ticking = false; // Allow next frame update
+                }
+
+                function onScroll() {
+                    if (!ticking) {
+                        requestAnimationFrame(updateImages);
+                        ticking = true;
+                    }
+                }
+
+                // Run on scroll with requestAnimationFrame optimization
+                wrapper.addEventListener("scroll", onScroll);
+                updateImages();
+            });
+
+            document.addEventListener("DOMContentLoaded", function () {
+                const title = document.getElementById("title");
+                const fourthSlide = document.querySelector(".fourth");
+
+                // Create an Intersection Observer for the fourth slide
+                const observer = new IntersectionObserver(
+                    (entries) => {
+                        entries.forEach((entry) => {
+                            if (entry.isIntersecting) {
+                                // When the fourth slide is visible, hide the title
+                                title.style.opacity = 0;
+                            } else {
+                                // When the fourth slide is not visible, show the title
+                                title.style.opacity = 1;
+                            }
+                        });
+                    },
+                    { threshold: 0.1 },
+                );
+
+                observer.observe(fourthSlide);
+            });
+        </script>
+    </body>
+</html>
